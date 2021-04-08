@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Dimmer, Label, Loader, Table} from "semantic-ui-react";
-import moment from "moment";
+import {convertDate, convertTime, convertStatus} from "../../../utils";
 
 export default class PlaceReservationTable extends Component {
   render() {
@@ -44,27 +44,3 @@ export default class PlaceReservationTable extends Component {
   }
 }
 
-function convertDate(numberedDate) {
-  const year = parseInt(numberedDate / 10000);
-  const month = parseInt((numberedDate % 10000) / 100);
-  const day = numberedDate % 100;
-  const date = new Date().setFullYear(year, month - 1, day);
-  return moment(date).format("YYYY.MM.DD")
-}
-
-function convertTime(numberTime) {
-  const hour = parseInt(numberTime / 100);
-  const minute = numberTime % 100;
-  const time = new Date().setHours(hour, minute)
-  return moment(time).format('HH:mm');
-}
-
-function convertStatus(status) {
-  let labelColor = 'black';
-  if (status === '통과') {
-    labelColor = 'green';
-  } else if (status === '거절') {
-    labelColor = 'red';
-  }
-  return <Label circular color={labelColor} empty/>
-}

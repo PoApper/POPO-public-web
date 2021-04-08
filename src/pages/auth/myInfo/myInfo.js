@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Form, Segment} from "semantic-ui-react";
+import { Container, Form, Segment} from "semantic-ui-react";
 import axios from "axios";
 import moment from "moment";
 import './myInfo.css';
