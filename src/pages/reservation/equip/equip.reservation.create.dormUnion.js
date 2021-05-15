@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import {Form, Modal, Dimmer, Loader, Divider} from 'semantic-ui-react'
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {Form, Divider, Modal} from "semantic-ui-react";
+import axios from "axios";
 
-const ownerName = {
-  'dongyeon': "동아리연합회",
-  'dormUnion': "생활관자치회",
-  'saengna': "생각나눔",
-}
-
-export default class EquipReservationCreateModal extends Component {
+export default class EquipReservationCreateDormUnion extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      open: false,
-      equip: this.props.equipInfo.equipName,
-      user: this.props.userInfo.id,
       date: new Date(),
       startTime: new Date().setHours(new Date().getHours() + (new Date().getMinutes() > 30), 30 * (new Date().getMinutes() <= 30)),
       endTime: new Date().setHours(new Date().getHours() + 1, 30 * (new Date().getMinutes() > 30)),
@@ -35,8 +28,9 @@ export default class EquipReservationCreateModal extends Component {
       const startTime = new Date(this.state.startTime);
       const endTime = new Date(this.state.endTime);
       await axios.post(`${process.env.REACT_APP_API_URL}/reservation-equip`, {
-        'equip': this.state.equip,
-        'user': this.state.user,
+        'equips': this.state.equips,
+        'user': this.props.userInfo.id,
+        'owner': this.props.owner,
         'phone': this.state.phone,
         'title': this.state.title,
         'description': this.state.description,
@@ -49,12 +43,9 @@ export default class EquipReservationCreateModal extends Component {
       window.location.reload();
     } catch (error) {
       const response = error.response;
+      console.log(error)
       alert(`예약 생성에 실패했습니다. 😢\n${response.data.message}`)
     }
-  }
-
-  dateComparison = (date1, date2) => {
-    return (date1.getDate() === date2.getDate()) && (date1.getMonth() === date2.getMonth()) && (date1.getFullYear() === date2.getFullYear());
   }
 
   render() {
@@ -65,21 +56,29 @@ export default class EquipReservationCreateModal extends Component {
         open={this.state.open} trigger={this.props.trigger}
         size='small'
       >
-        <Modal.Header>장비 예약 생성</Modal.Header>
+        <Modal.Header>예약 신청서 작성</Modal.Header>
         <Modal.Content>
+          <h3 style={{color: "red"}}>
+            ※ 카트가 분실 되거나 예약한 시간을 초과하여 사용한 경우, 차후 예약에 제한을 둘 수 있습니다. 카트 사용 시간을 반드시 지켜주세요. ※
+          </h3>
           <Form>
-            <Form.Group>
-              <Form.Input required readOnly label={'장비 소속'} name='region'
-                          value={ownerName[this.props.equipInfo.owner]}/>
-              <Form.Input required readOnly label={'장비'} name='equip' value={this.props.equipInfo.equipName}/>
-            </Form.Group>
-            <Form.Input required readOnly label={'사용자'} name='user' value={this.props.userInfo.name}/>
-            <Form.Input required label={'전화번호'} name='phone' equipholder='010-xxxx-xxxx' onChange={this.handleChange}/>
-            <Form.Input required label={'예약 제목'} name='title' equipholder='예약 제목을 작성해주세요.'
+            <Form.Input required readOnly label='사용자' name='user' value={this.props.userInfo.name}/>
+            <Form.Input required label='전화번호' name='phone' placeholder='010-xxxx-xxxx'
                         onChange={this.handleChange}/>
-            <Form.TextArea required label={'설명'} name='description' equipholder={'사용처를 반드시 작성 해주세요.'}
+            <Form.Input required label='예약 제목' name='title' placeholder='예약 제목을 작성해주세요.'
+                        onChange={this.handleChange}/>
+            <Form.TextArea required label='설명' name='description' placeholder={'출발지와 도착지를 반드시 명시해주세요! (ex: 7동 301호 -> 4동 101호)'}
                            onChange={this.handleChange}/>
-
+            <Divider/>
+            <Form.Dropdown placeholder="예약할 장비들을 선택해주세요." label="장비 선택" name='equips'
+                           fluid search selection required
+                           options={this.props.equips.map((equip, idx) => ({
+                             key: idx,
+                             text: equip.name,
+                             value: equip.uuid,
+                           }))}
+                           onChange={this.handleChange}
+            />
             <Form.Group>
               <div className={"required field"}>
                 <label>날짜</label>
@@ -87,17 +86,19 @@ export default class EquipReservationCreateModal extends Component {
                   name='date' dateFormat="yyyy-MM-dd"
                   selected={this.state.date} minDate={new Date()}
                   maxDate={(new Date()).setDate((new Date()).getDate() + 30)}
-                  onChange={date => this.dateComparison(new Date(), date) ?
-                    this.setState({
-                      date: date,
-                      startTime: new Date().setHours(new Date().getHours() + (new Date().getMinutes() > 30), 30 * (new Date().getMinutes() <= 30)),
-                      endTime: new Date().setHours(new Date().getHours() + 1, 30 * (new Date().getMinutes() > 30)),
-                    }) :
-                    this.setState({
-                      date: date,
-                      startTime: new Date(date).setHours(0, 0),
-                      endTime: new Date(date).setHours(0, 30)
-                    })
+                  onChange={date => {
+                    dateComparison(new Date(), date) ?
+                      this.setState({
+                        date: date,
+                        startTime: new Date().setHours(new Date().getHours() + (new Date().getMinutes() > 30), 30 * (new Date().getMinutes() <= 30)),
+                        endTime: new Date().setHours(new Date().getHours() + 1, 30 * (new Date().getMinutes() > 30)),
+                      }) :
+                      this.setState({
+                        date: date,
+                        startTime: new Date(date).setHours(9, 0),
+                        endTime: new Date(date).setHours(9, 30)
+                      })
+                  }
                   }
                 />
               </div>
@@ -107,8 +108,8 @@ export default class EquipReservationCreateModal extends Component {
                   showTimeSelect showTimeSelectOnly timeIntervals={30}
                   name='startTime' dateFormat="hh:mm aa"
                   selected={this.state.startTime}
-                  minTime={this.dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(0, 0, 1))}
-                  maxTime={new Date().setHours(23, 59, 0)}
+                  minTime={dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(9, 0))}
+                  maxTime={new Date().setHours(20, 30, 0)}
                   onChange={startTime => this.setState({
                     startTime: startTime,
                     endTime: new Date(startTime).setMinutes(startTime.getMinutes() + 30)
@@ -122,20 +123,25 @@ export default class EquipReservationCreateModal extends Component {
                   name='endTime' dateFormat="hh:mm aa"
                   selected={this.state.endTime}
                   minTime={new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 30)}
-                  maxTime={new Date().setHours(23, 59, 0)}
-                  injectTimes={[new Date().setHours(23, 59, 0)]}
+                  maxTime={
+                    new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60) > new Date(this.state.startTime).setHours(20, 59, 0)
+                    ? new Date(this.state.startTime).setHours(21, 0, 0) : new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60)
+                  }
                   onChange={endTime => this.setState({endTime: endTime})}
                 />
               </div>
             </Form.Group>
-            <Modal.Actions>
-              <Form.Button onClick={this.handleSubmit}>
-                생성
-              </Form.Button>
-            </Modal.Actions>
+            <Form.Button onClick={this.handleSubmit}>
+              생성
+            </Form.Button>
           </Form>
         </Modal.Content>
       </Modal>
     )
   }
+}
+
+
+function dateComparison(date1, date2) {
+  return (date1.getDate() === date2.getDate()) && (date1.getMonth() === date2.getMonth()) && (date1.getFullYear() === date2.getFullYear());
 }

@@ -26,3 +26,13 @@ export function convertStatus(status) {
   }
   return <Label circular color={labelColor} empty/>
 }
+
+export function convertDateTime(numberedDate, numberTime) {
+  const year = parseInt(numberedDate / 10000);
+  const month = parseInt((numberedDate % 10000) / 100);
+  const day = numberedDate % 100;
+  const date = new Date().setFullYear(year, month - 1, day);
+  const hour = parseInt(numberTime / 100);
+  const minute = numberTime % 100;
+  return new Date(date).setHours(hour, minute);
+}
