@@ -77,6 +77,7 @@ export default class EquipReservationCreateDormUnion extends Component {
                              text: equip.name,
                              value: equip.uuid,
                            }))}
+                           onKeyDown={e => e.preventDefault()}
                            onChange={this.handleChange}
             />
             <Form.Group>
@@ -86,6 +87,7 @@ export default class EquipReservationCreateDormUnion extends Component {
                   name='date' dateFormat="yyyy-MM-dd"
                   selected={this.state.date} minDate={new Date()}
                   maxDate={(new Date()).setDate((new Date()).getDate() + 30)}
+                  onKeyDown={e => e.preventDefault()}
                   onChange={date => {
                     dateComparison(new Date(), date) ?
                       this.setState({
@@ -110,6 +112,7 @@ export default class EquipReservationCreateDormUnion extends Component {
                   selected={this.state.startTime}
                   minTime={dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(9, 0))}
                   maxTime={new Date().setHours(20, 30, 0)}
+                  onKeyDown={e => e.preventDefault()}
                   onChange={startTime => this.setState({
                     startTime: startTime,
                     endTime: new Date(startTime).setMinutes(startTime.getMinutes() + 30)
@@ -127,6 +130,7 @@ export default class EquipReservationCreateDormUnion extends Component {
                     new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60) > new Date(this.state.startTime).setHours(20, 59, 0)
                     ? new Date(this.state.startTime).setHours(21, 0, 0) : new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60)
                   }
+                  onKeyDown={e => e.preventDefault()}
                   onChange={endTime => this.setState({endTime: endTime})}
                 />
               </div>

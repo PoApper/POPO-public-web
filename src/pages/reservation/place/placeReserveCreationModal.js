@@ -85,6 +85,7 @@ export default class PlaceReserveCreationModal extends Component {
                   name='date' dateFormat="yyyy-MM-dd"
                   selected={this.state.date} minDate={new Date()}
                   maxDate={(new Date()).setDate((new Date()).getDate() + 30)}
+                  onKeyDown={e => e.preventDefault()}
                   onChange={date => this.dateComparison(new Date(), date) ?
                     this.setState({
                       date: date,
@@ -107,6 +108,7 @@ export default class PlaceReserveCreationModal extends Component {
                   selected={this.state.startTime}
                   minTime={this.dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(0, 0, 1))}
                   maxTime={new Date().setHours(23, 59, 0)}
+                  onKeyDown={e => e.preventDefault()}
                   onChange={startTime => this.setState({
                     startTime: startTime,
                     endTime: new Date(startTime).setMinutes(startTime.getMinutes() + 30)
@@ -122,6 +124,7 @@ export default class PlaceReserveCreationModal extends Component {
                   minTime={new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 30)}
                   maxTime={new Date().setHours(23, 59, 0)}
                   injectTimes={[new Date().setHours(23, 59, 0)]}
+                  onKeyDown={e => e.preventDefault()}
                   onChange={endTime => this.setState({endTime: endTime})}
                 />
               </div>
