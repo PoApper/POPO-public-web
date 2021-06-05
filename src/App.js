@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
 import './App.css'
-import NavBar from "./nav-bar/nav-bar";
-import Footer from "./footer/footer";
+import NavBar from "./components/nav-bar/nav-bar";
+import Footer from "./components/footer/footer";
 import Login from "./pages/auth/login/login";
 import Signup from "./pages/auth/signup/signup";
 import PrivacyPolicy from "./pages/others/PrivacyPolicy/PrivacyPolicy";
