@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Dimmer, Label, Loader, Table} from "semantic-ui-react";
-import {convertDate, convertTime, convertStatus} from "../../../utils";
+import {convertDate, convertTime, convertStatus} from "../../utils";
 
 export default class PlaceReservationTable extends Component {
   render() {

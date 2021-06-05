@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Table} from "semantic-ui-react";
+import {Button, Image, Modal, Table} from "semantic-ui-react";
 import axios from "axios";
 import EquipReservationCreate from "./equip.reservation.create";
 
@@ -58,6 +58,10 @@ export default class EquipList extends Component {
                 <Button primary>예약 신청하기</Button>
               }
             /> : <Button primary onClick={() => alert("POPO 로그인 후 이용 가능합니다.")}>예약 신청하기</Button>}
+            <p style={{marginTop: "10px"}}>
+              - 장비를 클릭하면, 장비 사진을 볼 수 있습니다!<br/>
+              - 현재 장비 예약은 가능하지만, 예약 조회는 개발 중입니다! 👨‍💻
+            </p>
             <Table celled selectable>
               <Table.Header>
                 <Table.Row>
@@ -69,12 +73,22 @@ export default class EquipList extends Component {
               <Table.Body>
                 {
                   this.state.equips.map((equip, idx) =>
-                    <Table.Row key={idx}>
-                      <Table.Cell>{idx + 1}</Table.Cell>
-                      <Table.Cell>{equip.name}</Table.Cell>
-                      <Table.Cell>{equip.fee}</Table.Cell>
-                    </Table.Row>)
-                }
+                    <Modal
+                      trigger={<Table.Row key={idx}>
+                        <Table.Cell>{idx + 1}</Table.Cell>
+                        <Table.Cell>{equip.name}</Table.Cell>
+                        <Table.Cell>{equip.fee}</Table.Cell>
+                      </Table.Row>}
+                    >
+                      <Modal.Content>
+                        <Image size='medium' centered
+                          src={(equip.imageName) ?
+                            `${process.env.REACT_APP_API_URL}/equip/image/${equip.imageName}`
+                            : 'https://react.semantic-ui.com/images/wireframe/image.png'}
+                        />
+                      </Modal.Content>
+                    </Modal>
+                  )}
               </Table.Body>
             </Table>
           </div>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Card, Grid, Icon, Image, Label, Loader} from "semantic-ui-react";
 import {DateInput} from 'semantic-ui-calendar-react';
 import axios from "axios";
-import PlaceReservationTable from "./placeReservationTable";
+import PlaceReservationTable from "../../../components/reservation/placeReservationTable";
 import PlaceReserveCreationModal from "./placeReserveCreationModal";
 
 /**

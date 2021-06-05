@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Card, Grid, Icon, Image, Label, Loader} from "semantic-ui-react";
 import {DateInput} from 'semantic-ui-calendar-react';
 import axios from "axios";
-import EquipReservationTable from "./equip.reservation.table";
+import EquipReservationTable from "../../../components/reservation/equip.reservation.table";
 import EquipReservationCreateModal from "./equip.reservation.createModal";
 
 // URL: /reservation/equip/:owner/:equipName
