@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import {Grid, Image} from "semantic-ui-react";
+import styled from 'styled-components'
 
 export default class AssociationIntroduce extends Component {
   constructor(props) {
@@ -39,10 +40,10 @@ export default class AssociationIntroduce extends Component {
 
     return intros.map((inner_intros, idx) => {
       return (
-        <Grid.Row columns='equal'>
+        <Grid.Row columns='equal' key={idx}>
           {inner_intros.map((_intro, idx) => {
             return (
-              <Grid.Column>
+              <Grid.Column key={idx}>
                 {
                   _intro ?
                     <div>
@@ -50,7 +51,7 @@ export default class AssociationIntroduce extends Component {
                              src={(_intro.logoName) ?
                                `${process.env.REACT_APP_API_URL}/introduce/association/image/${_intro.logoName}` :
                                'https://react.semantic-ui.com/images/wireframe/image.png'}/>
-                      <h3>{_intro.name}</h3>
+                      <AssociationName>{_intro.name}</AssociationName>
                     </div> : null
                 }
               </Grid.Column>
@@ -72,3 +73,7 @@ export default class AssociationIntroduce extends Component {
     )
   }
 }
+
+const AssociationName = styled.h3`
+  word-break: keep-all;
+`
