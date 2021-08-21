@@ -11,8 +11,8 @@ export default class SectionHome extends Component {
     return (
       <Container>
         <div id={"textCarousel"} style={{
-          margin: "0 -16vw 1.5rem",
-          padding: "3px 16vw",
+          margin: "0 0 1.5rem",
+          padding: "3px 4rem",
           border: "1px ridge black",
           backgroundColor: "#474d4e", color: "#FFD12A",
         }}>

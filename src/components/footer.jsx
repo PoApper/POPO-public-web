@@ -26,7 +26,7 @@ export default class Footer extends Component {
               </Grid.Column>
               <Grid.Column width={4}>
                 <Header as='h4' content='Developed by'/>
-                <Image src='/PoApper_logo.svg' size={"small"} centered href={"https://poapper.com/"} target="_blank"/>
+                <Image src='/PoApper_logo.svg' size={"small"} centered href={"https://club.poapper.com/"} target="_blank"/>
                 <List link>
                   <List.Item as='a' href="/recruit-developer">
                     개발자 모집
