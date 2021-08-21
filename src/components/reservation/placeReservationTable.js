@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimmer, Label, Loader, Table} from "semantic-ui-react";
+import { Dimmer, Label, Loader, Table } from 'semantic-ui-react'
 import {convertDate, convertTime, convertStatus} from "../../utils";
 
 export default class PlaceReservationTable extends Component {
@@ -25,7 +25,9 @@ export default class PlaceReservationTable extends Component {
                     {convertDate(reservation.date)}<br/>
                     {convertTime(reservation.startTime)} ~ {convertTime(reservation.endTime)}
                   </Table.Cell>
-                  <Table.Cell>{convertStatus(reservation.reserveStatus)}</Table.Cell>
+                  <Table.Cell>
+                    <Label circular empty color={convertStatus(reservation.reserveStatus)}/>
+                  </Table.Cell>
                 </Table.Row>
               })
               : <Table.Row>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Table} from "semantic-ui-react";
+import {Button} from "semantic-ui-react";
 import axios from "axios";
-import EquipReservationCreate from "./equip.reservation.create";
 
 import Timeline from "react-calendar-timeline";
 import 'react-calendar-timeline/lib/Timeline.css'
@@ -78,7 +77,6 @@ export default class EquipListDormUnion extends Component {
   };
 
   render() {
-    const {params} = this.props.match;
     return (
       <section style={{padding: "0 6vw", marginBottom: "4em"}}>
         <h1>생활관 자치회 - 카트 예약하기</h1>

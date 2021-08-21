@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Dimmer, Label, Loader, Table} from "semantic-ui-react";
 import moment from "moment";
+import { convertStatus } from '../../utils'
 
 export default class EquipReservationTable extends Component {
   render() {
@@ -25,7 +26,9 @@ export default class EquipReservationTable extends Component {
                     {convertDate(reservation.date)}<br/>
                     {convertTime(reservation.startTime)} ~ {convertTime(reservation.endTime)}
                   </Table.Cell>
-                  <Table.Cell>{convertStatus(reservation.reserveStatus)}</Table.Cell>
+                  <Table.Cell>
+                    <Label circular empty color={convertStatus(reservation.reserveStatus)}/>
+                  </Table.Cell>
                 </Table.Row>
               })
               : <Table.Row>
@@ -57,14 +60,4 @@ function convertTime(numberTime) {
   const minute = numberTime % 100;
   const time = new Date().setHours(hour, minute)
   return moment(time).format('HH:mm');
-}
-
-function convertStatus(status) {
-  let labelColor = 'black';
-  if (status === '통과') {
-    labelColor = 'green';
-  } else if (status === '거절') {
-    labelColor = 'red';
-  }
-  return <Label circular color={labelColor} empty/>
 }

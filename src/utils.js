@@ -1,6 +1,4 @@
 import moment from "moment";
-import {Label} from "semantic-ui-react";
-import React from "react";
 
 export function convertDate(numberedDate) {
   const year = parseInt(numberedDate / 10000);
@@ -18,13 +16,14 @@ export function convertTime(numberTime) {
 }
 
 export function convertStatus(status) {
-  let labelColor = 'black';
-  if (status === '통과') {
-    labelColor = 'green';
-  } else if (status === '거절') {
-    labelColor = 'red';
+  switch (status) {
+    case '통과':
+      return 'green'
+    case '거절':
+      return 'red'
+    default:
+      return 'black'
   }
-  return <Label circular color={labelColor} empty/>
 }
 
 export function convertDateTime(numberedDate, numberTime) {

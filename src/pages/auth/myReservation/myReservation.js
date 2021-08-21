@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Container, Table} from "semantic-ui-react";
+import { Container, Label, Table } from 'semantic-ui-react'
 import axios from "axios";
-import {convertDate, convertTime, convertStatus} from "../../../utils";
 import moment from "moment";
+import {convertDate, convertTime, convertStatus} from "../../../utils";
 
 export default class MyReservation extends Component {
   constructor(props) {
@@ -52,7 +52,9 @@ export default class MyReservation extends Component {
                         {convertDate(reservation.date)}<br/>
                         {convertTime(reservation.startTime)} ~ {convertTime(reservation.endTime)}
                       </Table.Cell>
-                      <Table.Cell>{convertStatus(reservation.reserveStatus)}</Table.Cell>
+                      <Table.Cell>
+                        <Label circular empty color={convertStatus(reservation.reserveStatus)}/>
+                      </Table.Cell>
                       <Table.Cell>{moment(new Date(reservation.createdAt)).format('YYYY.MM.DD')}</Table.Cell>
                     </Table.Row>
                   })
