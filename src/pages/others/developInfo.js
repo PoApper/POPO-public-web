@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Grid, Icon, Image, Popup} from "semantic-ui-react";
-import ReactJS from './ReactJS-logo.png';
-import SemanticUI from './SemanticUIReact-logo.png';
-import NestJS from './NestJS-logo.svg';
-import './developInfo.css'
+import {Container, Grid, Icon, Popup} from "semantic-ui-react";
+import styled from 'styled-components'
 
 export default class DevelopInfo extends Component {
   render() {
@@ -39,32 +36,55 @@ export default class DevelopInfo extends Component {
           <h1 style={{fontFamily: "Caveat", textAlign: "center"}}>
             “Talk is cheap. Show me your code.”
           </h1>
-          <p id={"frameWorks"} style={{margin: "1em 21vw", textAlign: "center"}}>
+          <FrameWorkDiv>
             <p><strong>Developed With</strong></p>
-            <Grid >
+            <FrameWorkGrid>
               <Grid.Row columns={3}>
-                <Grid.Column>
-                  <Image src={ReactJS}/>
-                  <p style={{fontFamily: "Caveat", fontSize: "17px", fontWeight: "bold"}}>
+                <Grid.Column centered>
+                  <FrameWorkImage src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react.svg"/>
+                  <FrameWorkName>
                     ReactJS
-                  </p>
+                  </FrameWorkName>
                 </Grid.Column>
                 <Grid.Column>
-                  <Image src={NestJS}/>
-                  <p style={{fontFamily: "Caveat", fontSize: "17px", fontWeight: "bold"}}>
+                  <FrameWorkImage src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/nestjs.svg"/>
+                  <FrameWorkName>
                     NestJS
-                  </p></Grid.Column>
+                  </FrameWorkName>
+                </Grid.Column>
                 <Grid.Column>
-                  <Image src={SemanticUI}/>
-                  <p style={{fontFamily: "Caveat", fontSize: "17px", fontWeight: "bold"}}>
-                    Semantic-UI React
-                  </p>
+                  <FrameWorkImage src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/semantic-ui.svg"/>
+                  <FrameWorkName>
+                    Semantic-UI
+                  </FrameWorkName>
                 </Grid.Column>
               </Grid.Row>
-            </Grid>
-          </p>
+            </FrameWorkGrid>
+          </FrameWorkDiv>
         </Container>
       </section>
     )
   }
 }
+
+const FrameWorkDiv = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const FrameWorkGrid = styled(Grid)`
+  width: 30rem;
+`
+
+const FrameWorkImage = styled.img`
+  width: 5rem;
+  height: 5rem;
+`
+
+const FrameWorkName = styled.p`
+  font-family: Caveat, serif;
+  font-size: 17px;
+  font-weight: bold;
+`

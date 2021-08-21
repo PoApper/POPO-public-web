@@ -3,7 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import ClubIntroduceHome from "./introduce/club.introduceHome";
 import ClubIntroduceClubType from "./introduce/club.introduce.clubType";
 import ClubIntroduceSingle from "./introduce/club.introduce.single";
-import ServiceReady from "../others/ServiceReady/ServiceReady";
+import ServiceReady from "../others/ServiceReady";
 
 /**
  * @url: /club

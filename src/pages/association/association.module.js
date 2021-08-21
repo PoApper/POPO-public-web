@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
 import AssociationIntroduce from "./introduce/association.introduce";
 import AssociationIntroduceSingle from "./introduce/association.introduce.single";
-import ServiceReady from "../others/ServiceReady/ServiceReady";
+import ServiceReady from "../others/ServiceReady";
 
 /**
  * @url: /association
