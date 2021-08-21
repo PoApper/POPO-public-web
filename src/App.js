@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
 import './App.css'
-import NavBar from "./components/nav-bar/nav-bar";
-import Footer from "./components/footer/footer";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 import Login from "./pages/auth/login/login";
 import Signup from "./pages/auth/signup/signup";
 import PrivacyPolicy from "./pages/others/PrivacyPolicy/PrivacyPolicy";
@@ -23,7 +23,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <Navbar/>
         <Container style={{margin: "5em 0 1em", padding: "2em 0"}}>
             <Switch>
               <Route exact path={"/"} component={SectionHome}/>

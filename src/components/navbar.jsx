@@ -3,9 +3,8 @@ import {Link} from "react-router-dom";
 import {Button, Dropdown, Header, Image, Menu, Visibility} from 'semantic-ui-react';
 import Responsive from "semantic-ui-react/dist/commonjs/addons/Responsive";
 import axios from "axios";
-import POPO_logo from './popo.svg';
 
-export default class NavBar extends Component {
+export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +24,7 @@ export default class NavBar extends Component {
     }
   }
 
-  handleLogout = async (e) => {
+  handleLogout = async () => {
     try {
       console.log("before");
       await axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`, {withCredentials: true});
@@ -50,7 +49,7 @@ export default class NavBar extends Component {
                 style={menuFixed ? fixedMenuStyle : menuStyle}>
             <Menu.Item position={"left"}>
               <Link to={"/"}>
-                <Image centered src={POPO_logo} size={"small"}/>
+                <Image centered src='/popo.svg' size={"small"}/>
                 <Header as='h1'
                         style={{fontFamily: "Caveat", textAlign: "center", marginTop: "-0.4em", fontSize: "medium"}}>
                   Postechian's Portal
