@@ -9,7 +9,6 @@
     "animated-number-react": "^0.1.1",
     "axios": "^0.21.1",
     "interactjs": "^1.10.11",
-    "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
     "pure-react-carousel": "^1.27.6",
     "react": "^17.0.1",
