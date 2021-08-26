@@ -1,10 +1,11 @@
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import Navbar from './navbar'
 import Footer from './footer'
+import theme from '../styles/theme'
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Navbar/>
       <main>
         <Wrapper>
@@ -12,14 +13,14 @@ const Layout = ({ children }) => {
         </Wrapper>
       </main>
       <Footer/>
-    </>
+    </ThemeProvider>
   )
 }
 
 const Wrapper = styled.div`
   height: 100%;
   min-height: calc(100vh - 200px);
-  max-width: 80rem;
+  max-width: ${({theme}) => theme.contentWidth};
   padding: 8rem 1rem 2rem;
   margin: 0 auto;
   display: flex;
