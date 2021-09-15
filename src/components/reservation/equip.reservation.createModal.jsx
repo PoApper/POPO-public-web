@@ -5,10 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import {Form, Divider, Modal} from "semantic-ui-react";
 import axios from "axios";
 
-export default class EquipReservationCreateDormUnion extends Component {
+export default class EquipReservationCreateModal extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       date: new Date(),
       startTime: new Date().setHours(new Date().getHours() + (new Date().getMinutes() > 30), 30 * (new Date().getMinutes() <= 30)),
@@ -58,20 +57,17 @@ export default class EquipReservationCreateDormUnion extends Component {
       >
         <Modal.Header>예약 신청서 작성</Modal.Header>
         <Modal.Content>
-          <h3 style={{color: "red"}}>
-            ※ 카트가 분실 되거나 예약한 시간을 초과하여 사용한 경우, 차후 예약에 제한을 둘 수 있습니다. 카트 사용 시간을 반드시 지켜주세요. ※
-          </h3>
           <Form>
             <Form.Input required readOnly label='사용자' name='user' value={this.props.userInfo.name}/>
             <Form.Input required label='전화번호' name='phone' placeholder='010-xxxx-xxxx'
                         onChange={this.handleChange}/>
             <Form.Input required label='예약 제목' name='title' placeholder='예약 제목을 작성해주세요.'
                         onChange={this.handleChange}/>
-            <Form.TextArea required label='설명' name='description' placeholder={'출발지와 도착지를 반드시 명시해주세요! (ex: 7동 301호 -> 4동 101호)'}
+            <Form.TextArea required label='설명' name='description' placeholder={'사용처를 반드시 작성 해주세요.'}
                            onChange={this.handleChange}/>
             <Divider/>
             <Form.Dropdown placeholder="예약할 장비들을 선택해주세요." label="장비 선택" name='equips'
-                           fluid search selection required
+                           fluid multiple search selection required
                            options={this.props.equips.map((equip, idx) => ({
                              key: idx,
                              text: equip.name,
@@ -97,8 +93,8 @@ export default class EquipReservationCreateDormUnion extends Component {
                       }) :
                       this.setState({
                         date: date,
-                        startTime: new Date(date).setHours(9, 0),
-                        endTime: new Date(date).setHours(9, 30)
+                        startTime: new Date(date).setHours(0, 0),
+                        endTime: new Date(date).setHours(0, 30)
                       })
                   }
                   }
@@ -110,8 +106,8 @@ export default class EquipReservationCreateDormUnion extends Component {
                   showTimeSelect showTimeSelectOnly timeIntervals={30}
                   name='startTime' dateFormat="hh:mm aa"
                   selected={this.state.startTime}
-                  minTime={dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(9, 0))}
-                  maxTime={new Date().setHours(20, 30, 0)}
+                  minTime={dateComparison(new Date(), this.state.date) ? new Date() : (new Date().setHours(0, 0, 1))}
+                  maxTime={new Date().setHours(23, 59, 0)}
                   onKeyDown={e => e.preventDefault()}
                   onChange={startTime => this.setState({
                     startTime: startTime,
@@ -126,10 +122,8 @@ export default class EquipReservationCreateDormUnion extends Component {
                   name='endTime' dateFormat="hh:mm aa"
                   selected={this.state.endTime}
                   minTime={new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 30)}
-                  maxTime={
-                    new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60) > new Date(this.state.startTime).setHours(20, 59, 0)
-                    ? new Date(this.state.startTime).setHours(21, 0, 0) : new Date(this.state.startTime).setMinutes(new Date(this.state.startTime).getMinutes() + 60)
-                  }
+                  maxTime={new Date().setHours(23, 59, 0)}
+                  injectTimes={[new Date().setHours(23, 59, 0)]}
                   onKeyDown={e => e.preventDefault()}
                   onChange={endTime => this.setState({endTime: endTime})}
                 />
