@@ -11,7 +11,7 @@ import ServiceReady from "../others/ServiceReady";
 export default class AssociationModule extends Component {
   render() {
     return (
-      <div style={{padding: "3vh 5vw"}}>
+      <div style={{width: "100%"}}>
         <Switch>
           <Route exact path={"/association"} component={AssociationIntroduce}/>
           <Route exact path={"/association/introduce"} component={AssociationIntroduce}/>

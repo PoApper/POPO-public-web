@@ -3,7 +3,7 @@ import {Button, Card, Grid, Icon, Image, Label, Loader} from "semantic-ui-react"
 import {DateInput} from 'semantic-ui-calendar-react';
 import axios from "axios";
 import PlaceReservationTable from "../../../components/reservation/placeReservationTable";
-import PlaceReserveCreationModal from "./placeReserveCreationModal";
+import PlaceReserveCreationModal from "../../../components/reservation/placeReserveCreationModal";
 
 /**
  * @url: /reservation/place/:region/:placeName
@@ -75,7 +75,7 @@ export default class PlaceReservation extends Component {
   render() {
     const {params} = this.props.match;
     return (
-      <section style={{padding: "0 1vw", margin: "0 2vw 4em"}}>
+      <div>
         <Grid columns={2} divided stackable>
           <Grid.Row>
             <Grid.Column width={6}>
@@ -103,7 +103,7 @@ export default class PlaceReservation extends Component {
                                                        <Button basic compact>
                                                          <Icon name={'calendar plus outline'}/> 예약하기
                                                        </Button>}/>
-                          : <Button basic compact onClick={(e) => {
+                          : <Button basic compact onClick={() => {
                             alert("로그인 후 이용 가능합니다!");
                             this.props.history.push('/login');
                           }}>
@@ -137,7 +137,7 @@ export default class PlaceReservation extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </section>
+      </div>
     )
   }
 }

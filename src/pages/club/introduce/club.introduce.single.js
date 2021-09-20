@@ -23,7 +23,7 @@ export default class ClubIntroduceSingle extends Component {
 
   render() {
     return (
-      <section>
+      <div>
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column width={10}>
@@ -52,7 +52,7 @@ export default class ClubIntroduceSingle extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </section>
+      </div>
     )
   }
 }

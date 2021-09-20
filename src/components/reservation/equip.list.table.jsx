@@ -19,7 +19,7 @@ const EquipListTable = (props) => {
               trigger={<Table.Row key={idx}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{equip.name}</Table.Cell>
-                <Table.Cell>{equip.fee}</Table.Cell>
+                <Table.Cell>{equip.fee.toLocaleString()}</Table.Cell>
               </Table.Row>}
             >
               <Modal.Content>

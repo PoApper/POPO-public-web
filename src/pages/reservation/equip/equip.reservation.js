@@ -21,6 +21,12 @@ const ownerName = {
   'saengna': '생각나눔',
 }
 
+const ownerLocation = {
+  'dongyeon': '동아리연합회 사무실(학생회관 301호)',
+  'dormUnion': '생활관자치회 사무실(생활관 4동)',
+  'saengna': '생각나눔 사무실(학생회관 108호)',
+}
+
 const EquipReservation = (props) => {
   const owner = props.match.params.owner
 
@@ -42,7 +48,7 @@ const EquipReservation = (props) => {
   }, [selectedDate, owner])
 
   return (
-    <section>
+    <div>
       <h1>{ownerName[owner]} - 장비 예약하기</h1>
 
       <Grid columns={2} divided stackable>
@@ -50,7 +56,9 @@ const EquipReservation = (props) => {
           <Grid.Column width={6}>
             <EquipListTable equips={equips}/>
             <p style={{ marginTop: '10px' }}>
-              장비를 클릭하면, 장비 사진을 볼 수 있습니다!
+              장비를 클릭하면 장비 사진을 볼 수 있습니다! 🖼️<br/>
+              예약한 장비는 {ownerLocation[owner]}에서 수령하실 수 있습니다. 🏢️<br/>
+              장비가 분실되거나 예약 시간을 초과할 경우, 차후 예약에 제한을 둘 수 있습니다. 🚨
             </p>
             {
               userInfo ? (
@@ -87,7 +95,7 @@ const EquipReservation = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </section>
+    </div>
   )
 }
 

@@ -13,8 +13,8 @@ export default class ClubIntroduceHome extends Component {
 
   render() {
     return (
-      <section>
-        <Grid stackable style={{marginBottom: "4em", textAlign: "center"}} columns={3}>
+      <div>
+        <Grid stackable style={{textAlign: "center"}} columns={3}>
           <Grid.Row>
             <Grid.Column>
               <Card href={"/club/introduce/performance1"}>
@@ -80,7 +80,7 @@ export default class ClubIntroduceHome extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </section>
+      </div>
     )
   }
 

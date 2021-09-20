@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {Form, Divider, Modal} from "semantic-ui-react";
 import axios from "axios";
+
+const ownerName = {
+  'dongyeon': '동아리연합회',
+  'dormUnion': '생활관자치회',
+  'saengna': '생각나눔',
+}
 
 export default class EquipReservationCreateModal extends Component {
   constructor(props) {
@@ -21,7 +26,7 @@ export default class EquipReservationCreateModal extends Component {
     })
   }
 
-  handleSubmit = async (e) => {
+  handleSubmit = async () => {
     try {
       const date = this.state.date;
       const startTime = new Date(this.state.startTime);
@@ -55,7 +60,7 @@ export default class EquipReservationCreateModal extends Component {
         open={this.state.open} trigger={this.props.trigger}
         size='small'
       >
-        <Modal.Header>예약 신청서 작성</Modal.Header>
+        <Modal.Header>{ownerName[this.props.owner]} 예약 신청서 작성</Modal.Header>
         <Modal.Content>
           <Form>
             <Form.Input required readOnly label='사용자' name='user' value={this.props.userInfo.name}/>

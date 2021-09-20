@@ -42,7 +42,7 @@ export default class PlaceList extends Component {
   render() {
     const {params} = this.props.match;
     return (
-      <section style={{padding: "0 6vw", marginBottom: "4em"}}>
+      <div>
         <h1>{regionName[params.region]} - 장소 예약하기</h1>
         {this.state.places ?
           <Card.Group>
@@ -65,7 +65,7 @@ export default class PlaceList extends Component {
               </Card>
             })}
           </Card.Group> : <p>empty...</p>}
-      </section>
+      </div>
     )
   }
 }

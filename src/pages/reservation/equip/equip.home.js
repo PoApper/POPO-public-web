@@ -7,8 +7,8 @@ import saengna_img from './images/saengna.jpg'
 export default class EquipHome extends Component {
   render() {
     return (
-      <section>
-        <Grid stackable style={{padding: "0 6vw", marginBottom: "4em"}}>
+      <div>
+        <Grid stackable>
           <Grid.Row centered columns={3}>
             <Grid.Column>
               <Card href={"/reservation/equip/dongyeon"} centered >
@@ -39,7 +39,7 @@ export default class EquipHome extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </section>
+      </div>
     )
   }
 

@@ -28,7 +28,7 @@ export default class AssociationIntroduceSingle extends Component {
 
   render() {
     return (
-      <section>{
+      <div>{
         this.state.isLoaded ?
           <Grid>
             <Grid.Row columns={2}>
@@ -56,7 +56,7 @@ export default class AssociationIntroduceSingle extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid> : null
-      }</section>
+      }</div>
     )
   }
 }

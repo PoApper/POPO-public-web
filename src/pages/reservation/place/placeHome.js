@@ -7,8 +7,8 @@ import Dormitory_img from './images/dormitory_img.jpg'
 export default class PlaceHome extends Component {
   render() {
     return (
-      <section>
-        <Grid stackable style={{padding: "0 6vw", marginBottom: "4em"}}>
+      <div>
+        <Grid stackable>
           <Grid.Row centered columns={3}>
             <Grid.Column>
               <Card href={"/reservation/place/student-hall"} centered>
@@ -39,7 +39,7 @@ export default class PlaceHome extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </section>
+      </div>
     )
   }
 

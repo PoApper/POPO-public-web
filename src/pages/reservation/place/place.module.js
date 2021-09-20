@@ -13,7 +13,7 @@ import PlaceReservation from "./placeReservation";
 export default class PlaceModule extends Component {
   render() {
     return (
-      <div>
+      <div style={{width: "100%"}}>
         <Switch>
           <Route exact path={"/reservation/place"} component={PlaceHome}/>
           <Route exact path={"/reservation/place/:region"} component={PlaceList}/>

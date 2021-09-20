@@ -12,7 +12,7 @@ import ServiceReady from "../others/ServiceReady";
 export default class ClubModule extends Component {
   render() {
     return (
-      <div style={{padding: "3vh 7vw"}}>
+      <div style={{width: "100%"}}>
         <Switch>
           <Route exact path={"/club"} component={ClubIntroduceHome}/>
           <Route exact path={"/club/introduce"} component={ClubIntroduceHome}/>

@@ -15,6 +15,7 @@ export default class ActivateAccount extends Component {
       const {params} = this.props.match;
       console.log(await axios.put(
         `${process.env.REACT_APP_API_URL}/auth/activate/${params.uuid}`, {withCredentials: true}))
+      console.log("alskdnflksndfs");
       this.setState({
         isValidAccount: true
       })

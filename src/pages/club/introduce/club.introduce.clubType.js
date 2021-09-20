@@ -61,13 +61,13 @@ export default class ClubIntroduceClubType extends Component {
 
   render() {
     return (
-      <section>
+      <div>
         <Grid textAlign='center' stackable>
           {
             this.genGrid(4)
           }
         </Grid>
-      </section>
+      </div>
     )
   }
 }
